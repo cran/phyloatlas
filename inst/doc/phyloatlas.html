@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Getting started with phyloatlas</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Getting started with phyloatlas</h1>
+
+
+
+<div id="what-this-package-does" class="section level2">
+<h2>What this package does</h2>
+<p><code>phyloatlas</code> is a thin R client for the <a href="https://github.com/franciscorichter/phylo-species-atlas">Phylo-Species
+Atlas</a>, a curated collection of standardized empirical phylogenetic
+trees covering Bacteria, Archaea, and Eukaryota. The atlas itself lives
+on GitHub and is version-pinned via Zenodo. This R package gives you
+four convenience functions to fetch any of those trees with species
+labels resolved from the shared dictionary, plus helpers to list
+available trees and inspect their provenance.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(phyloatlas)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">&quot;package:phyloatlas&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;atlas_clear_cache&quot; &quot;atlas_info&quot;        &quot;list_trees&quot;       </span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt; [4] &quot;load_atlas_tree&quot;</span></span></code></pre></div>
+</div>
+<div id="loading-a-tree-offline-demo" class="section level2">
+<h2>Loading a tree (offline demo)</h2>
+<p>The package ships a small Newick file under
+<code>inst/extdata/</code> so you can explore the API without a network
+connection. In production you would call
+<code>load_atlas_tree(&quot;mammals&quot;)</code> (or any other tree name from
+<code>list_trees()</code>); the demo below shows the shape of the
+returned object.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>demo_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;tree_demo.nwk&quot;</span>, <span class="at">package =</span> <span class="st">&quot;phyloatlas&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>tree <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.tree</span>(demo_path)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>tree</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; Phylogenetic tree with 10 tips and 9 internal nodes.</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; Tip labels:</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt;   1, 2, 3, 4, 5, 6, ...</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; Rooted; includes branch length(s).</span></span></code></pre></div>
+<p>The returned object is a standard <code>ape::phylo</code>, so
+anything that works on <code>phylo</code> works here:
+<code>Ntip()</code>, <code>branching.times()</code>,
+<code>plot()</code>, etc.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">no.margin =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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VEt9exMgQIAAgToQyF7Xk73La+cXQH/pS1+KZcuWld72vnHjxrjqqqvi/PPPj0GDBiXRsQCUxBgUQYAAAQIE8iuQffjhpk2bYtiwYa1NdOvWLS6++OI48sgjSy+UHjBgQPzqV79qvb3WVxreT207al2E/QkQIECAAIHqClxyySUxePDg+OEPf1jRjdevXx9du3YtvSC6ohvt4eJeBL2HYO5OgAABAgQIdFxg59cBdfxRlb+np8Aqb2wHAgQIECBAIDEBASixgSiHAAECBAgQqLyAAFR5YzsQIECAAAECiQkIQIkNRDkECBAgQIBA5QUEoMob24EAAQIECBBITEAASmwgyiFAgAABAgQqL+Bt8JU3tgMBAgQIEGgjsH379ti6dWt06VKbcxHZ/kX+KEAfhNjmT9IBAgQIECBQeYGf/OQncf3110djY2PlN9vNDtu2bYszzzwzZs6cuZtb6/+QM0D1P2MdEiBAgECCAiNHjoyJEyfG3Llza1Ldh58EXZPNE9i0NufdEmhcCQQIECBAgEBxBQSg4s5e5wQIECBAoLACAlBhR69xAgQIECBQXAEBqLiz1zkBAgQIECisgABU2NFrnAABAgQIFFdAACru7HVOgAABAgQKKyAAFXb0GidAgAABAsUVEICKO3udEyBAgACBwgoIQIUdvcYJECBAgED5BN5+++147bXXyrdghVfySdAVBrY8AQIECBCoZ4HNmzfHBRdcEE899VR07949Dj300HjggQdq9hUfHbV2BqijUu5HgAABAgQItBH46U9/GuvWrYt//vOf0dzcHNl3jP3tb39rc7/UDghAqU1EPQQIECBAIEcCv/3tb+PGG2+MvfbaKxoaGuK0006LWbNmJd+Bp8CSH5ECCRAgQIBA+QXWr18fK1eujEWLFnV68UGDBsWqVati//33b13jxRdfjA0bNrT+nuoVASjVyaiLAAECBAhUUGDNmjXx6KOPxoIFCzq9y4wZM2LYsGFxxx13xM9+9rN47LHH4u67747rr7++02tW64ECULWk7UOAAAECBBISmDNnTlmqyQLPJZdcEgceeGAcc8wx0aVLlzjyyCPLsnYlF/EaoErqWpsAAQIECNSxQPbi56amptKZn//85z9x1llnRY8ePeLLX/5y8l0LQMmPSIEECBAgQCBNgSVLlsS4ceOipaUl3njjjbjpppvi6quv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" /><!-- --></p>
+</div>
+<div id="loading-a-real-atlas-tree-requires-network" class="section level2">
+<h2>Loading a real atlas tree (requires network)</h2>
+<p>When you have an internet connection, <code>load_atlas_tree()</code>
+fetches a standardized Newick file from the live atlas and resolves its
+integer tip IDs to species names using the shared dictionary.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">load_atlas_tree</span>(<span class="st">&quot;mammals&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>tree</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">head</span>(tree<span class="sc">$</span>tip.label)</span></code></pre></div>
+<p>For large trees (e.g. seed plants, ~342 k tips), skip the 18 MB
+dictionary download by setting <code>resolve_labels = FALSE</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">load_atlas_tree</span>(<span class="st">&quot;seed_plants&quot;</span>, <span class="at">resolve_labels =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="browsing-available-trees" class="section level2">
+<h2>Browsing available trees</h2>
+<p><code>list_trees()</code> returns a data frame with one row per tree
+and provenance columns merged in from the atlas’s
+<code>data_provenance.csv</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>trees <span class="ot">&lt;-</span> <span class="fu">list_trees</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">head</span>(trees[, <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;study&quot;</span>, <span class="st">&quot;ntips&quot;</span>, <span class="st">&quot;dated&quot;</span>, <span class="st">&quot;year&quot;</span>)])</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Filter to dated trees with at least 1000 tips</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="fu">subset</span>(trees, dated <span class="sc">&amp;</span> ntips <span class="sc">&gt;</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p><code>atlas_info()</code> returns the same row for a single tree,
+useful for scripting:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">atlas_info</span>(<span class="st">&quot;birds&quot;</span>)</span></code></pre></div>
+</div>
+<div id="pointing-at-a-fork-or-local-mirror" class="section level2">
+<h2>Pointing at a fork or local mirror</h2>
+<p>The package fetches everything relative to a single base URL, which
+you can override per session:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">options</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">phyloatlas.base_url =</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="st">&quot;https://raw.githubusercontent.com/yourfork/phylo-species-atlas/main&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">atlas_clear_cache</span>()  <span class="co"># forget cached dictionary/metadata</span></span></code></pre></div>
+<p>This is also the mechanism the package’s own test suite uses to point
+at a <code>file://</code> URL containing a miniature mirror of the
+atlas, so the tests run completely offline.</p>
+</div>
+<div id="provenance-and-reproducibility" class="section level2">
+<h2>Provenance and reproducibility</h2>
+<p>Every tree in the atlas has a record in <a href="https://github.com/franciscorichter/phylo-species-atlas/blob/main/audits/table_s5_canonical_tree_provenance.csv">Supplementary
+Table S5</a> (per-tree provenance) and the historical succession of
+canonicals is in <a href="https://github.com/franciscorichter/phylo-species-atlas/blob/main/audits/table_s7_canonical_succession.csv">Supplementary
+Table S7</a>. For reproducibility, cite the version-specific Zenodo DOI
+for the atlas release you used; the package version
+(<code>packageVersion(&quot;phyloatlas&quot;)</code>) identifies the client.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;phyloatlas&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] &#39;0.1.0&#39;</span></span></code></pre></div>
+</div>
+<div id="where-to-learn-more" class="section level2">
+<h2>Where to learn more</h2>
+<ul>
+<li>Atlas repository: <a href="https://github.com/franciscorichter/phylo-species-atlas" class="uri">https://github.com/franciscorichter/phylo-species-atlas</a></li>
+<li>Live atlas browser: <a href="https://franciscorichter.github.io/phylo-species-atlas/" class="uri">https://franciscorichter.github.io/phylo-species-atlas/</a></li>
+<li>Per-partition wiki pages: <a href="https://github.com/franciscorichter/phylo-species-atlas/wiki" class="uri">https://github.com/franciscorichter/phylo-species-atlas/wiki</a></li>
+<li>Bug reports / feature requests: <a href="https://github.com/franciscorichter/phylo-species-atlas/issues" class="uri">https://github.com/franciscorichter/phylo-species-atlas/issues</a></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
