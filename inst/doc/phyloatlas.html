@@ -389,9 +389,9 @@ integer tip IDs to species names using the shared dictionary.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">load_atlas_tree</span>(<span class="st">&quot;mammals&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>tree</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">head</span>(tree<span class="sc">$</span>tip.label)</span></code></pre></div>
-<p>For large trees (e.g. seed plants, ~342 k tips), skip the 18 MB
+<p>For large trees (e.g. ray-finned fishes, ~31 k tips), skip the 18 MB
 dictionary download by setting <code>resolve_labels = FALSE</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">load_atlas_tree</span>(<span class="st">&quot;seed_plants&quot;</span>, <span class="at">resolve_labels =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">load_atlas_tree</span>(<span class="st">&quot;fish&quot;</span>, <span class="at">resolve_labels =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="browsing-available-trees" class="section level2">
 <h2>Browsing available trees</h2>
@@ -429,7 +429,7 @@ Table S7</a>. For reproducibility, cite the version-specific Zenodo DOI
 for the atlas release you used; the package version
 (<code>packageVersion(&quot;phyloatlas&quot;)</code>) identifies the client.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;phyloatlas&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] &#39;0.1.0&#39;</span></span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] &#39;0.1.1&#39;</span></span></code></pre></div>
 </div>
 <div id="where-to-learn-more" class="section level2">
 <h2>Where to learn more</h2>

@@ -1,7 +1,7 @@
 Package: phyloatlas
 Type: Package
 Title: Access to the 'Phylo-Species Atlas' of Empirical Phylogenies
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Francisco",
            family = "Richter",
@@ -31,9 +31,9 @@ Config/testthat/edition: 3
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
 NeedsCompilation: no
-Packaged: 2026-05-31 14:49:51 UTC; pancho
+Packaged: 2026-11-07 21:30:45 UTC; pancho
 Author: Francisco Richter [aut, cre] (ORCID:
     <https://orcid.org/0000-0002-0924-4613>)
 Maintainer: Francisco Richter <richtf@usi.ch>
 Repository: CRAN
-Date/Publication: 2026-06-04 12:00:02 UTC
+Date/Publication: 2026-11-07 22:20:14 UTC

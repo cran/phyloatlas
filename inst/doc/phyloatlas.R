@@ -28,8 +28,8 @@ plot(tree, cex = 0.8, no.margin = TRUE)
 # tree
 # head(tree$tip.label)
 
-## ----load-seedplants, eval = NOT_CRAN-----------------------------------------
-# tree <- load_atlas_tree("seed_plants", resolve_labels = FALSE)
+## ----load-fish, eval = NOT_CRAN-----------------------------------------------
+# tree <- load_atlas_tree("fish", resolve_labels = FALSE)
 
 ## ----list-trees, eval = NOT_CRAN----------------------------------------------
 # trees <- list_trees()
